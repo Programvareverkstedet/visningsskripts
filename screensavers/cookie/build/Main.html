@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="UTF-8"><title>Main</title><script type="text/javascript" src="elm-runtime.js"></script><script type="text/javascript">Elm.Main = Elm.Main || {};
+Elm.Main.make = function (_elm) {
+   "use strict";
+   _elm.Main = _elm.Main || {};
+   if (_elm.Main.values)
+   return _elm.Main.values;
+   var _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   _A = _N.Array.make(_elm),
+   _E = _N.Error.make(_elm),
+   $moduleName = "Main";
+   var Basics = Elm.Basics.make(_elm);
+   var Color = Elm.Color.make(_elm);
+   var Graphics = Graphics || {};
+   Graphics.Collage = Elm.Graphics.Collage.make(_elm);
+   var Graphics = Graphics || {};
+   Graphics.Element = Elm.Graphics.Element.make(_elm);
+   var List = Elm.List.make(_elm);
+   var Maybe = Elm.Maybe.make(_elm);
+   var Native = Native || {};
+   Native.Json = Elm.Native.Json.make(_elm);
+   var Native = Native || {};
+   Native.Ports = Elm.Native.Ports.make(_elm);
+   var Signal = Elm.Signal.make(_elm);
+   var String = Elm.String.make(_elm);
+   var Text = Elm.Text.make(_elm);
+   var Time = Elm.Time.make(_elm);
+   var Window = Elm.Window.make(_elm);
+   var _op = {};
+   var sound = Text.markdown("<div style=\"height:0;width:0;\">&nbsp;</div><p><iframe style=\"display:none\"\n          src=\"http://mynoise.net/NoiseMachines/throatSingingDroneGenerator.php?c=0&l=99772423572458243922&a=1\"\n  ></iframe></p><div style=\"height:0;width:0;\">&nbsp;</div>",
+   "59:9");
+   _op["//"] = F2(function (a,b) {
+      return Basics.toFloat(a) / Basics.toFloat(b);
+   });
+   var degreesPer = F2(function (angle,
+   time) {
+      return Basics.degrees(angle) / time;
+   });
+   var timesPer = F2(function (count,
+   interval) {
+      return Time.every(interval / count);
+   });
+   var fit = F3(function (w,
+   h,
+   elem) {
+      return function () {
+         var aspWin = A2(_op["//"],
+         w,
+         h);
+         var $ = Graphics.Element.sizeOf(elem),
+         ew = $._0,
+         eh = $._1;
+         var aspPic = A2(_op["//"],
+         ew,
+         eh);
+         var fac = _U.cmp(aspPic,
+         aspWin) > 0 ? A2(_op["//"],
+         w,
+         ew) : A2(_op["//"],h,eh);
+         return function ($) {
+            return A2(Graphics.Collage.collage,
+            w,
+            h)(A2(Basics.flip,
+            F2(function (x,y) {
+               return {ctor: "::"
+                      ,_0: x
+                      ,_1: y};
+            }),
+            _L.fromArray([]))($));
+         }(Graphics.Collage.scale(fac)(Graphics.Collage.toForm(elem)));
+      }();
+   });
+   var baseUrl = "http://orteil.dashnet.org/cookieclicker/img/";
+   var img = F2(function (x,y) {
+      return function ($) {
+         return Graphics.Collage.toForm(A2(Graphics.Element.image,
+         x,
+         y)(F2(function (x,y) {
+            return _L.append(x,y);
+         })(baseUrl)($)));
+      };
+   });
+   var tiledImg = function ($) {
+      return A2(Graphics.Element.tiledImage,
+      0,
+      0)(F2(function (x,y) {
+         return _L.append(x,y);
+      })(baseUrl)($));
+   };
+   var nest = A3(img,
+   304,
+   161,
+   "nest.png");
+   var shine = A3(img,
+   512,
+   512,
+   "shine.png");
+   var cookie = A3(img,
+   256,
+   256,
+   "perfectCookie.png");
+   var bgBlue = tiledImg("bgBlue.jpg");
+   var foreground = function (time) {
+      return A3(Graphics.Collage.collage,
+      512,
+      512,
+      _L.fromArray([Graphics.Collage.rotate(time * A2(degreesPer,
+                   -30,
+                   Time.second))(Graphics.Collage.alpha(0.5)(shine))
+                   ,Graphics.Collage.rotate(time * A2(degreesPer,
+                   15,
+                   Time.second))(Graphics.Collage.alpha(0.25)(shine))
+                   ,Graphics.Collage.moveY(-130)(nest)
+                   ,cookie]));
+   };
+   var paint = F2(function (_v0,
+   time) {
+      return function () {
+         switch (_v0.ctor)
+         {case "_Tuple2":
+            return Graphics.Element.layers(_L.fromArray([A2(Graphics.Element.size,
+                                                        _v0._0,
+                                                        _v0._1)(bgBlue)
+                                                        ,A3(Graphics.Element.container,
+                                                        _v0._0,
+                                                        _v0._1,
+                                                        Graphics.Element.middle)(A2(fit,
+                                                        Basics.floor(Basics.toFloat(_v0._0) * 0.7),
+                                                        Basics.floor(Basics.toFloat(_v0._1) * 0.7))(foreground(time)))
+                                                        ,sound]));}
+         _E.Case($moduleName,
+         "between lines 6 and 13");
+      }();
+   });
+   var main = A2(Signal._op["~"],
+   A2(Signal._op["<~"],
+   paint,
+   Window.dimensions),
+   A2(timesPer,30,Time.second));
+   _elm.Main.values = {_op: _op
+                      ,main: main
+                      ,paint: paint
+                      ,foreground: foreground
+                      ,bgBlue: bgBlue
+                      ,cookie: cookie
+                      ,shine: shine
+                      ,nest: nest
+                      ,baseUrl: baseUrl
+                      ,img: img
+                      ,tiledImg: tiledImg
+                      ,fit: fit
+                      ,timesPer: timesPer
+                      ,degreesPer: degreesPer
+                      ,sound: sound};
+   return _elm.Main.values;
+};</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.Main)</script><noscript></noscript></body></html>

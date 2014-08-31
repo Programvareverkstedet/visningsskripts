@@ -1,0 +1,3 @@
+#!/bin/bash
+xset dpms force on
+mpv --loop=inf ~/youtube-dl-vids/maya.mp4

@@ -1,0 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import random
+import os
+
+time=int(random.random()*100)
+timestr=str(time)+"%"
+os.system("mpv ~/youtube-dl-vids/bergensbanen.mp4 --start=%s" %timestr)

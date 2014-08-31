@@ -1,0 +1,7 @@
+#!/bin/bash
+
+pidof elm-server || (cd "$HOME/.local/lib" elm-server) &
+
+sleep 1
+
+chromium-browser --app="http://localhost:8000/cookie.elm"

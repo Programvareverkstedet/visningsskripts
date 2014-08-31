@@ -1,0 +1,25 @@
+#!/bin/bash
+xset dpms force on
+echo "Hold your breath and wait 15sec."
+
+picture_type=(".jpg" ".jpeg" ".png" ".bmp")
+
+for i in "${picture_type[@]}"; do
+	if [[ $1 == *$i ]]; then
+		mpv --keep-open "$1"
+		exit
+	fi
+        done
+
+if [[ $1 == *".gif" ]]; then
+	mpv --loop=inf "$1"
+else 	
+	if [[ $2 == "loop" ]]; then
+		mpv --loop=inf $(youtube-dl -g "$1")
+	else
+		mpv $(youtube-dl -g "$1")
+	fi
+fi 
+
+
+

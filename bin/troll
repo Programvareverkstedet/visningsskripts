@@ -1,0 +1,4 @@
+#!/bin/bash
+xset dpms force on
+wait 3
+mpv ~/youtube-dl-vids/troll.mp4

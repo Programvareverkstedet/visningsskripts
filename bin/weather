@@ -1,0 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import os
+
+os.system("feh --auto-zoom --fullscreen --slideshow-delay 20 --cycle-once http://www.yr.no/place/Norway/S%C3%B8r-Tr%C3%B8ndelag/Trondheim/Trondheim/meteogram.png")

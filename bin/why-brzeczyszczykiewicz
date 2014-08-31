@@ -1,0 +1,3 @@
+#!/bin/bash
+xset dpms force on
+mpv ~/youtube-dl-vids/brzeczyszczykiewicz.mp4

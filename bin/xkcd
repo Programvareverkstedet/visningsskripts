@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+import urllib2
+import os
+import random
+
+os.system("xset dpms force on")
+
+newest = "http://xkcd.com/info.0.json"
+
+response = urllib2.urlopen(newest)
+
+obj = json.load(response)
+
+highest = obj['num']
+for i in range(500):
+  newcomic = "http://xkcd.com/%s/info.0.json"%str(int(random.random()*highest+1))
+  response = urllib2.urlopen(newcomic)
+  newobj = json.load(response)
+  os.system("feh %s --fullscreen --zoom max --slideshow-delay 20 --cycle-once" %newobj['img'])
